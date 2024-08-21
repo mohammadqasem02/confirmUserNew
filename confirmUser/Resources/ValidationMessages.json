@@ -1,0 +1,13 @@
+{
+  "PasswordRequired": "Password is required",
+  "PasswordLength": "Password must be exactly 14 characters long.",
+  "PasswordFormat": "Password must contain exactly 14 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.",
+  "NameENRequired": "Full name in English is required",
+  "NameENFormat": "Only English letters and spaces are allowed",
+  "NameARRequired": "Full name in Arabic is required",
+  "NameARFormat": "Only Arabic letters and spaces are allowed",
+  "EmailRequired": "Email address is required",
+  "EmailFormat": "Invalid Email Address format",
+  "MobilePhoneRequired": "Mobile phone number is required",
+  "DistanceKMRequired": "Distance in kilometers is required"
+}

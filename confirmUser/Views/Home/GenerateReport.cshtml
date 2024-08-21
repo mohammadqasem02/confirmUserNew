@@ -1,0 +1,163 @@
+﻿@* @model ReportModel
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "Report";
+}
+
+@using (Html.BeginForm("GenerateReport", "Home", FormMethod.Get, new { id = "report" }))
+{
+    <div class="container con">
+    <h1>Report Summary</h1>
+    
+   
+    
+        <div class="report-summary">
+            <div class="report-card">
+                <h2>Summary</h2>
+                <p><strong>Sum of Trips Number:</strong> @Model.SumTripsNum</p>
+                <p><strong>Sum of Hours Number:</strong> @Model.SumHoursNum</p>
+                <p><strong>Sum of Trip Distance (KM):</strong> @Model.SumTripDistanceKM</p>
+            </div>
+
+            <div class="report-card">
+                <h2>Financials</h2>
+                <p><strong>Fees Paid to the Company:</strong> @Model.FeesPaidToTheCompany</p>
+                <p><strong>Fuel Cost:</strong> @Model.FuelCost</p>
+            </div>
+        </div>
+
+        <a href="@Url.Action("GetTrips", "Home")" class="btn-back">Back to Home</a>
+        </div>
+    }
+
+     <link href="~/css/reportstyle.css" rel="stylesheet" /> *@
+ @model ReportModel
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+
+    ViewData["Title"] = "Generate Report";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Generate Report</h1>
+
+    @using (Html.BeginForm("GenerateReport", "Home", FormMethod.Post))
+
+    {
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-outline mb-3">
+                    <label class="form-label" for="ApplicationID">Application</label>
+                    @Html.DropDownListFor(model => model.ApplicationID, (IEnumerable<SelectListItem>)ViewBag.Applications, "Select Application", new
+                        {
+                            @class = "form-control transition-shadow"
+                        })
+                    @Html.ValidationMessageFor(model => model.ApplicationID, "", new
+                        {
+                            @class = "text-danger"
+                        })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-outline mb-3">
+                    <label class="form-label" for="StartDate">Start Date</label>
+                    @Html.TextBoxFor(model => model.StartDate, @DateTime.Now.ToString("yyyy-MM-dd"), new
+                        {
+                            @class = "form-control transition-shadow",
+                            type = "date"
+                        })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new
+                        {
+                            @class = "text-danger"
+                        })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-outline mb-3">
+                    <label class="form-label" for="EndDate">End Date</label>
+                    @Html.TextBoxFor(model => model.EndDate, @DateTime.Now.ToString("yyyy-MM-dd"), new
+                        {
+                            @class = "form-control transition-shadow",
+                            type = "date"
+                        })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new
+                        {
+                            @class = "text-danger"
+                        })
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <button type="submit" class="btn btn-primary btn-lg transition-shadow">Generate Report</button>
+        </div>
+    }
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Report Summary</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card report-card shadow-lg rounded transition-shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Summary</h3>
+                        <p><strong>Sum of Trips Number:</strong> <span>@Model.SumTripsNum</span></p>
+                        <p><strong>Sum of Hours Number:</strong> <span>@Model.SumHoursNum</span></p>
+                        <p><strong>Sum of Trip Distance (KM):</strong> <span>@Model.SumTripDistanceKM</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card report-card shadow-lg rounded transition-shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Financials</h3>
+                        <p><strong>Fees Paid to the Company:</strong> <span>@Model.FeesPaidToTheCompany</span></p>
+                        <p><strong>Fuel Cost:</strong> <span>@Model.FuelCost</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary btn-lg transition-shadow">Back to Home</a>
+        </div>
+    </div>
+    }
+
+    @section Styles {
+        <style>
+            .transition-shadow {
+                transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+            }
+
+            .transition-shadow:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: scale(1.02);
+            }
+
+            .report-card {
+                background-color: #ffffff;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+            .btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+        </style>
+    }

@@ -1,0 +1,256 @@
+﻿@* @model tripDetails 
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "User Found";
+}
+<link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+<link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+@using (Html.BeginForm("GetTrips", "Home", FormMethod.Get, new { id = "loginForm" }))
+{
+
+
+    <div class="container con">
+        <div class="table-responsive">
+            <table id="trips" class="table table-striped table-bordered dt-responsive table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        
+                        <th>Trip Distance(KM)</th>
+                        <th>Trip Date </th>
+                        <th>Application Name </th>
+
+                        <th>TaxFis </th>
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Add your data rows here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<link href="~/css/innerpage.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+    <script src="~/js/createdatatabel.js"></script>
+} *@
+
+  @* @model IEnumerable<tripDetails>
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "User Found";
+}
+
+@using (Html.BeginForm("GetTrips", "Home", FormMethod.Get, new { id = "loginForm" }))
+{
+    <div class="container con">
+        <div class="table-responsive">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <table id="trips" class="table table-striped table-bordered table-hover mt-5">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        <th>Name</th>
+                        <th>Trip Distance (KM)</th>
+                        <th>Application Name</th>
+                        <th>TaxFees</th>
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var trip in Model)
+                    {
+                        <tr>
+                            <td>@trip.TripsNum</td>
+                            <td>@trip.HoursNum</td>
+                            <td>@trip.Name</td>
+                            <td>@trip.TripDistanceKM</td>
+                            <td>@trip.Applications</td>
+                            <td>TaxFis</td>
+                            <td>
+                                <a href="@Url.Action("Delete", "Home", new { id = trip.Id })" class="btn btn-danger rounded rounded-2 js-delete" data-id="@trip.Id" title="Remove">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Home", new { id = trip.Id })" class="btn btn-primary rounded rounded-2" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("View", "Home", new { id = trip.Id })" class="btn btn-info rounded rounded-2" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<link href="~/css/innerpage.css" rel="stylesheet" /> *@
+@model IEnumerable<TripViewModel>
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+
+    ViewData["Title"] = "User Found";
+}
+
+@using (Html.BeginForm("GetTrips", "Home", FormMethod.Get, new
+{
+    id = "loginForm"
+}))
+
+{
+    <div class="container mt-5">
+        <div class="table-responsive">
+            @if (ViewBag.Message != null)
+
+            {
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    @ViewBag.Message
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <table id="trips" class="table table-striped table-bordered table-hover mt-3 shadow-sm rounded">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        <th>Name</th>
+                        <th>Trip Distance (KM)</th>
+                        <th>Application Name</th>
+                        <th>TaxFees</th>
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="9" class="text-center">No trips found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var trip in Model)
+
+                        {
+                            <tr id="tripRow_@trip.Id" class="transition-shadow">
+                                <td>@trip.TripsNum</td>
+                                <td>@trip.HoursNum</td>
+                                <td>@trip.TripDate</td>
+                                <td>@trip.TripDistanceKM</td>
+                                <td>@trip.ApplicationName</td>
+                                <td>@trip.TaxFis</td>
+                                <td>
+                                    <a href="#" onclick="DeleteMember('@trip.Id'); return false;" class="btn btn-danger btn-sm rounded transition-shadow" data-id="@trip.Id" title="Remove">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="EditMember('@trip.Id'); return false;" class="btn btn-primary btn-sm rounded transition-shadow" data-id="@trip.Id" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("View", "Home", new { id = trip.Id })" class="btn btn-info btn-sm rounded transition-shadow" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@section Styles {
+    <style>
+        .transition-shadow {
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+            .transition-shadow:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: scale(1.02);
+            }
+
+        .table {
+            background-color: #ffffff;
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+        .btn {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+            .btn:hover {
+                opacity: 0.9;
+            }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-info:hover {
+            background-color: #017c92;
+            border-color: #017a8e;
+        }
+
+        .alert-dismissible .btn-close {
+            background-color: transparent;
+            border: none;
+        }
+
+            .alert-dismissible .btn-close:hover {
+                color: #000;
+            }
+    </style>
+}
+
+@section Scripts {
+    
+    <script src="~/js/deletetrip.js"></script>
+    <script src="~/js/edittrip.js"></script>
+}
+

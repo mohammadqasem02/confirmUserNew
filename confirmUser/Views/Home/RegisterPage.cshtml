@@ -1,0 +1,397 @@
+﻿@* @model RegisterUserFormViewModel
+
+<div class="container form-container">
+    <form asp-action="RegisterPage" method="post">
+        <div class="row">
+            <!-- UserNameEn and UserNameAr on the same line -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.NameEN, "Name in English", htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.TextBoxFor(x => x.NameEN, new { @class = "form-control", placeholder = "Enter your name in English" })
+                    @Html.ValidationMessageFor(x => x.NameEN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.NameAR, "اسم المستخدم باللغة العربية", htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.TextBoxFor(x => x.NameAR, new { @class = "form-control", placeholder = "ادخل اسمك باللغة العربية"})
+                    @Html.ValidationMessageFor(x => x.NameAR, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- Email and MobilePhone on the same line -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.UserName, htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Enter email", required = "required" })
+                    @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.MobilePhone, htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.TextBoxFor(x => x.MobilePhone, new
+                        {
+                            @class = "form-control",
+                            type = "tel",
+                            placeholder = "Enter Your Phone",
+                            oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)",
+                            id = "mobile",
+                            maxlength = "10",
+                            pattern = "[0-9]{10}",
+                            title = "Please enter a 10-digit phone number"
+                        })
+                    @Html.ValidationMessageFor(x => x.MobilePhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="row">
+            <!-- FuelType and CarType on the same line -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.FuelTypeId, htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.DropDownList("FuelTypeId", (IEnumerable<SelectListItem>)ViewBag.FuelTypes, "Select a Fuel Type", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CarTypeId, htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.DropDownList("CarTypeId", (IEnumerable<SelectListItem>)ViewBag.CarTypes, "Select a Car Type", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Password field -->
+           
+                <!-- DistanceKM and Flag on the same line -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.DistanceKM, htmlAttributes: new { @class = "form-label mt-4" })
+                        @Html.TextBoxFor(x => x.DistanceKM, new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter Distance (in KM)",
+                                oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)",
+                                maxlength = "10"
+                            })
+                        @Html.ValidationMessageFor(x => x.DistanceKM, "", new { @class = "text-danger" })
+                    </div>
+                
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="Flag" value="0" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.PassWord, htmlAttributes: new { @class = "form-label mt-4" })
+                    @Html.PasswordFor(x => x.PassWord, new { @class = "form-control", required = "required", autocomplete = "off" })
+                    @Html.ValidationMessageFor(x => x.PassWord, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="form-group mt-4 d-flex justify-content-between pt-2">
+            <!-- Back button -->
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+ *@
+@model RegisterUserFormViewModel
+
+<section class="vh-80 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card shadow-lg rounded-lg border-0 transition-transform mt-4">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <!-- Form Column -->
+                            <div class="w-100 col-md-12 col-lg-8 col-xl-7">
+                                <p class="text-center h1 fw-bold mb-5 mt-4 text-primary">
+                                    Sign up
+                                </p>
+                                <form asp-action="RegisterPage" method="post">
+                                    <!-- Name in English and Arabic on the same line -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.NameEN, "Name in English", htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.TextBoxFor(x => x.NameEN, new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow",
+                                                            placeholder = "Enter your name in English"
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.NameEN, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.NameAR, "اسم المستخدم باللغة العربية", htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.TextBoxFor(x => x.NameAR, new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow",
+                                                            placeholder = "ادخل اسمك باللغة العربية"
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.NameAR, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email and Phone on the same line -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.UserName, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.TextBoxFor(x => x.UserName, new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow",
+                                                            placeholder = "Enter email",
+                                                            required = "required"
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.UserName, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.MobilePhone, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.TextBoxFor(x => x.MobilePhone, new
+
+                                                        {
+
+                                                            @class = "form-control form-control-lg transition-shadow",
+
+                                                            type = "tel",
+
+                                                            placeholder = "Enter Your Phone",
+
+                                                            oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)",
+
+                                                            maxlength = "10",
+
+                                                            pattern = "[0-9]{10}",
+
+                                                            title = "Please enter a 10-digit phone number"
+
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.MobilePhone, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fuel Type and Car Type on the same line -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-gas-pump fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.FuelTypeId, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.DropDownList("FuelTypeId", (IEnumerable<SelectListItem>)ViewBag.FuelTypes, "Select a Fuel Type", new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-car fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.CarTypeId, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.DropDownList("CarTypeId", (IEnumerable<SelectListItem>)ViewBag.CarTypes, "Select a Car Type", new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Distance and Password on the same line -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-ruler fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.DistanceKM, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.TextBoxFor(x => x.DistanceKM, new
+
+                                                        {
+
+                                                            @class = "form-control form-control-lg transition-shadow",
+
+                                                            placeholder = "Enter Distance (in KM)",
+
+                                                            oninput = "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)",
+
+                                                            maxlength = "10"
+
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.DistanceKM, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    @Html.LabelFor(x => x.PassWord, htmlAttributes: new
+                                                        {
+                                                            @class = "form-label"
+                                                        })
+                                                    @Html.PasswordFor(x => x.PassWord, new
+                                                        {
+                                                            @class = "form-control form-control-lg transition-shadow",
+                                                            required = "required",
+                                                            autocomplete = "off"
+                                                        })
+                                                    @Html.ValidationMessageFor(x => x.PassWord, "", new
+                                                        {
+                                                            @class = "text-danger"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="d-flex justify-content-between mx-4 mb-3">
+                                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary btn-lg rounded-pill transition-shadow">Back</a>
+                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill transition-shadow">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Image Column -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <style>
+        .transition-shadow {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+            .transition-shadow:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: scale(1.02);
+            }
+
+        .card {
+            background-color: #ffffff;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .btn {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .form-control-lg {
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+        }
+
+        .text-primary {
+            color: #221d90 !important;
+        }
+    </style>
+}
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

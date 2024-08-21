@@ -1,0 +1,106 @@
+﻿.form-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-right: 16rem;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+    .form-control:focus {
+        border-color: #221d90;
+        box-shadow: 0 0 0 0.2rem rgba(34, 29, 144, 0.25);
+    }
+
+.btn-primary {
+    background-color: #221d90;
+    border-color: #221d90;
+}
+
+    .btn-primary:hover {
+        background-color: #1b1b7a;
+        border-color: #1b1b7a;
+    }
+
+.text-danger {
+    font-size: 0.875em;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+.container {
+    overflow: hidden;
+    max-width: 80%; /* Ensure container takes full width */
+    /*padding-left: 10px;*/ /* Adjust left padding as needed */
+    /*padding-right: 10px;*/
+    margin: 0 10 0 10; /* Adjust right padding as needed */
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+header, footer {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background-color: #221d90; /* Your preferred color */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+main {
+    padding: 20px;
+    margin: 60px 0; /* Adjust according to header and footer height */
+    height: calc(100vh - 120px); /* 100vh minus the combined height of header and footer */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.form-outline {
+    position: relative;
+    margin-bottom: 1.5rem; /* Space between form elements */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+.btn {
+    margin-top: 1rem; /* Space above button */
+}
+.fa-trash, .fa-edit, .fa-eye {
+    color: #221d90; /* Set icon color to white */
+    font-size: 24px; /* Adjust size if needed */
+}
+
+

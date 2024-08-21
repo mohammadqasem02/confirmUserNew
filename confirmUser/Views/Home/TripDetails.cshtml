@@ -1,0 +1,161 @@
+﻿@model tripDetails
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg rounded-lg border-0 transition-transform">
+                <div class="card-body p-md-5">
+                    <h2 class="text-center mb-5 text-primary">Trip Details</h2>
+                    <hr />
+                    @using (Html.BeginForm("TripDetails", "Home", FormMethod.Post))
+
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(model => model.User, new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    id = "UserId",
+                                    type = "hidden"
+                                })
+                            @Html.ValidationMessageFor(model => model.User, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="Name">User Name</label>
+                            @Html.TextBoxFor(model => model.Name, new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    id = "UserName",
+                                    @readonly = "readonly"
+                                })
+                            @Html.ValidationMessageFor(model => model.Name, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="TripDate">Trip Date</label>
+                            @Html.TextBoxFor(model => model.TripDate, "{0:yyyy-MM-dd}", new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    type = "date"
+                                })
+                            @Html.ValidationMessageFor(model => model.TripDate, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="TripsNum">Number of Trips</label>
+                            @Html.TextBoxFor(model => model.TripsNum, new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    id = "TripsNum",
+                                    type = "number"
+                                })
+                            @Html.ValidationMessageFor(model => model.TripsNum, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="HoursNum">Number of Hours</label>
+                            @Html.TextBoxFor(model => model.HoursNum, new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    id = "HoursNum",
+                                    type = "number"
+                                })
+                            @Html.ValidationMessageFor(model => model.HoursNum, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="TripDistanceKM">Trip Distance (KM)</label>
+                            @Html.TextBoxFor(model => model.TripDistanceKM, new
+                                {
+                                    @class = "form-control form-control-lg",
+                                    id = "TripDistanceKM",
+                                    type = "number",
+                                    step = "0.01"
+                                })
+                            @Html.ValidationMessageFor(model => model.TripDistanceKM, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="ApplicationID">Application</label>
+                            @Html.DropDownListFor(model => model.ApplicationID, (IEnumerable<SelectListItem>)ViewBag.Applications, "Select Application", new
+                                {
+                                    @class = "form-control form-control-lg"
+                                })
+                            @Html.ValidationMessageFor(model => model.ApplicationID, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <div class="d-flex justify-content-center mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill transition-shadow">Submit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .transition-transform {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .transition-transform:hover {
+                transform: scale(1.02);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control-lg {
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .form-label {
+            font-size: 0.875rem;
+        }
+
+        .text-primary {
+            color: #221d90 !important;
+        }
+    </style>
+}

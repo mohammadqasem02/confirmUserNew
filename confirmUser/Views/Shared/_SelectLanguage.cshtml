@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Builder;
+@using Microsoft.AspNetCore.Localization;
+@using Microsoft.AspNetCore.Http.Features;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options;
+@inject IViewLocalizer localizer
+@inject IOptions<RequestLocalizationOptions> options
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultures = options.Value.SupportedCultures
+
+    .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
+
+    .ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Language Selector</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .language-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+            .language-form select {
+                background-color: #ffffff;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
+                padding: 0.375rem 0.75rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                font-size: 1rem;
+            }
+
+                .language-form select:hover,
+                .language-form select:focus {
+                    border-color: #007bff;
+                    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+                }
+
+            .language-form button {
+                display: none;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-form">
+            <form method="post" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl">
+                <select name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                        asp-items="cultures"
+                        onchange="this.form.submit();">
+                    <option value="">Select Language</option>
+                    @foreach (var culture in cultures)
+
+                    {
+                        <option value="@culture.Value">@culture.Text</option>
+                    }
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

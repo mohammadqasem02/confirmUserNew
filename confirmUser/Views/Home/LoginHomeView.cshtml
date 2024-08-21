@@ -1,0 +1,212 @@
+﻿@* @@* model IEnumerable<tripDetails>
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "User Found";
+}
+@using (Html.BeginForm("LoginHomeView", "Home", FormMethod.Get, new { id = "loginForm" }))
+{
+   
+
+    <div class="container con">
+        <div class="table-responsive">
+            <table id="trips" class="table table-striped table-bordered table-hover">
+                @* <thead class="table-dark">
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        <th>Email</th>
+                        <th>Trip Distance(KM)</th>
+                        <th>Application Name </th>
+                        <th>TaxFis </th>
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                    </tr>
+                </thead> *@
+               
+             @* <tbody>
+            @foreach (var trip in Model)
+            {
+            <tr>
+                            <td>@trip.TripsNum</td>
+                            <td>@trip.HoursNum</td>
+                            <td>@trip.Name</td>
+                            <td>@trip.TripDistanceKM</td>
+                            <td>@trip.Applications </td>
+                            <td>TaxFis </td>
+                        </tr>
+            <a href="@Url.Action("view", "Home", new { id = trip.Id })" class="btn btn-info rounded rounded-2" title="View">
+            <i class="bi bi-eye"></i>
+            </a>
+
+                        <a href="@Url.Action("Edit", "Home", new { id = trip.Id })" class="btn btn-primary rounded rounded-2" title="Edit">
+            <i class="bi bi-pencil"></i>
+            </a>
+
+                        <a href="@Url.Action("Delete","Home" ,new { id = trip.Id })" class="btn btn-danger rounded rounded-2 js-delete" data-id="@trip.Id " title="Remove">
+            <i class="bi bi-trash3"></i>
+            </a> *@
+                @*  <form id="deleteForm-@user.Id" action="@Url.Action("Delete", "Home", new { id = user.Id })" method="delete">
+            @Html.Hidden("_method", "DELETE")
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger rounded rounded-2" title="Remove" onclick="return confirm('Are you sure you want to delete this user?');">
+            <i class="bi bi-trash3"></i>
+            </button>
+            </form> *@
+
+
+                
+          @*   </td>
+            </tr>
+            }
+            </tbody>
+            </table>
+        </div>
+    </div>
+}
+@* <link href="~/css/innerpage.css" rel="stylesheet" /> *@
+@* 
+@model IEnumerable<tripDetails>
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "User Found";
+}
+
+@using (Html.BeginForm("GetTrips", "Home", FormMethod.Post, new { id = "loginForm" }))
+{
+    <div class="container con">
+        <div class="table-responsive">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <table id="trips" class="table table-striped table-bordered table-hover mt-5">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        <th>Name</th>
+                        <th>Trip Distance (KM)</th>
+                        <th>Application Name</th>
+                        <th>TaxFees</th>
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var trip in Model)
+                    {
+                        <tr>
+                            <td>@trip.TripsNum</td>
+                            <td>@trip.HoursNum</td>
+                            <td>@trip.Name</td>
+                            <td>@trip.TripDistanceKM</td>
+                            <td>@trip.Applications</td>
+                            <td>TaxFis</td>
+                            <td>
+                                <a href="@Url.Action("Delete", "Home", new { id = trip.Id })" class="btn btn-danger rounded rounded-2 js-delete" data-id="@trip.Id" title="Remove">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Home", new { id = trip.Id })" class="btn btn-primary rounded rounded-2" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("View", "Home", new { id = trip.Id })" class="btn btn-info rounded rounded-2" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<link href="~/css/innerpage.css" rel="stylesheet" />
+@*  *@
+@*  @model IEnumerable<TripViewModel>
+
+@{
+    Layout = "~/Views/Shared/_CustomELayout.cshtml";
+    ViewData["Title"] = "User Found";
+}
+
+@using (Html.BeginForm("GetTrips", "Home", FormMethod.Get, new { id = "loginForm" }))
+{
+    <div class="container con">
+        <div class="table-responsive">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <table id="trips" class="table table-striped table-bordered table-hover mt-5">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Hours Number</th>
+                        <th>Name</th>
+                        <th>Trip Distance (KM)</th>
+                        <th>Application Name</th>
+                        <th>TaxFees</th>
+                        <th><i class="bi bi-trash"></i></th> <!-- Delete icon -->
+                        <th><i class="bi bi-pencil"></i></th>  <!-- Update icon -->
+                        <th><i class="bi bi-eye"></i></th>   <!-- View icon -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="9">No trips found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var trip in Model)
+                        {
+                            <tr>
+                                <td>@trip.TripsNum</td>
+                                <td>@trip.HoursNum</td>
+                                <td>@trip.Name</td>
+                                <td>@trip.TripDistanceKM</td>
+                                <td>@trip.ApplicationName</td>
+                                <td>@trip.TaxFis</td>
+                                <td>
+                                    <a href="@Url.Action("Delete", "Home", new { id = trip.Id })" class="btn btn-danger rounded rounded-2 js-delete" data-id="@trip.Id" title="Remove">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Home", new { id = trip.Id })" class="btn btn-primary rounded rounded-2" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("View", "Home", new { id = trip.Id })" class="btn btn-info rounded rounded-2" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<link href="~/css/innerpage.css" rel="stylesheet" />
+ *@

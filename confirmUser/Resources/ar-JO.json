@@ -1,0 +1,8 @@
+{
+  "LoginPrompt": "يرجى تسجيل الدخول إلى حسابك",
+  "UserNameLabel": "اسم المستخدم",
+  "PasswordLabel": "كلمة المرور",
+  "RegisterButton": "تسجيل",
+  "ForgotPasswordLink": "نسيت كلمة المرور؟",
+  "LoginButton": "تسجيل الدخول"
+}

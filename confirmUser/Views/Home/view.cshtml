@@ -1,0 +1,128 @@
+﻿@model TripViewModel
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-lg transition-transform">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4 text-primary">Trip Details</h2>
+                    <hr />
+
+                    <!-- Display fields in a row with label and value on the same line -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">User Name:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.Name</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Trip Date:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.TripDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Number of Trips:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.TripsNum</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Number of Hours:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.HoursNum</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Trip Distance (KM):</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.TripDistanceKM</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Application:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="form-control-plaintext text-muted">@Model.ApplicationName</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary rounded-pill transition-shadow">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .transition-transform {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .transition-transform:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .form-control-plaintext {
+            font-size: 1.1rem;
+            color: #495057;
+        }
+
+        .text-primary {
+            color: #007bff !important;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .fw-bold {
+            font-weight: 700;
+        }
+    </style>
+}

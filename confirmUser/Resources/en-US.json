@@ -1,0 +1,8 @@
+{
+  "LoginPrompt": "Please login to your account",
+  "UserNameLabel": "User Name",
+  "PasswordLabel": "Password",
+  "RegisterButton": "Register",
+  "ForgotPasswordLink": "Forgot password?",
+  "LoginButton": "Login"
+}

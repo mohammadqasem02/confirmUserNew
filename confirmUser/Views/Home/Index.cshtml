@@ -1,0 +1,110 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@model LoginUserFormViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new
+{
+    id = "loginForm"
+}))
+
+{
+    @Html.AntiForgeryToken()
+    <section class="vh-100 d-flex flex-column">
+        <div class="header-fixed">
+            <!-- Your fixed header content goes here -->
+        </div>
+
+        <div class="container flex-grow-1 d-flex justify-content-center align-items-center mt-5">
+            <div class="row justify-content-center w-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-lg rounded-lg border-0 transition-transform">
+                        <div class="card-body p-md-5 text-center">
+                            <div class="mb-4">
+                                <img src="~/images/logo 1.png" class="small-logo mb-3" alt="Logo" />
+                                <h5 class="fw-bold mb-0 text-white rounded p-2" style="background-color: #221d90;">@localizer["LoginPrompt"]</h5>
+                                <i class="fas fa-user-astronaut fa-3x my-4 text-primary"></i>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="username">@localizer["UserNameLabel"]</label>
+                                    <input type="text" id="username" name="Username" class="form-control form-control-lg transition-shadow" required />
+                                </div>
+                                <div class="form-outline mb-5">
+                                    <label class="form-label" for="password">@localizer["PasswordLabel"]</label>
+                                    <input type="password" id="password" name="Password" class="form-control form-control-lg transition-shadow" required />
+                                </div>
+                                <div class="text-center mb-4">
+                                    <a class="btn btn-secondary btn-lg rounded-pill transition-shadow text-body px-5 me-2" href="@Url.Action("RegisterPage", "Home")">@localizer["RegisterButton"]</a>
+                                    <a class="text-muted" href="@Url.Action("ForgotPassword", "Home")">@localizer["ForgotPasswordLink"]</a>
+                                </div>
+                                <div class="d-flex justify-content-center mb-4">
+                                    <button class="btn btn-primary btn-lg rounded-pill transition-shadow px-5" type="submit">@localizer["LoginButton"]</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-fixed">
+            <!-- Your fixed footer content goes here -->
+        </div>
+    </section>
+}
+
+@section Styles {
+    <style>
+        .transition-shadow {
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+            .transition-shadow:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: scale(1.02);
+            }
+
+        .card {
+            background-color: #ffffff;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .btn {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .header-fixed, .footer-fixed {
+            /* Customize header and footer if needed */
+        }
+
+        .small-logo {
+            max-width: 150px;
+        }
+    </style>
+}

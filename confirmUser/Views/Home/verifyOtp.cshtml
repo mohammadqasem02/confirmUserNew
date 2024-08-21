@@ -1,0 +1,103 @@
+﻿@model ForgotPasswordModel
+
+@{
+    ViewData["Title"] = "Verify OTP";
+}
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-lg rounded-lg border-0 transition-transform">
+                <div class="card-body p-md-5">
+                    <h2 class="text-center mb-4 text-primary">@ViewData["Title"]</h2>
+                    <hr />
+
+                    @using (Html.BeginForm("VerifyOtp", "Home", FormMethod.Post))
+
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="enteredOtp">Enter OTP</label>
+                            <input type="text" class="form-control form-control-lg" id="enteredOtp" name="enteredOtp" required />
+                            @Html.ValidationMessageFor(model => model.EnteredOtp, "", new
+                                {
+                                    @class = "text-danger"
+                                })
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill transition-shadow">Verify OTP</button>
+                    }
+
+                    @if (ViewData.ModelState.ContainsKey(""))
+
+                    {
+
+                        var errorMessage = ViewData.ModelState[""].Errors.FirstOrDefault()?.ErrorMessage;
+
+                        if (!string.IsNullOrEmpty(errorMessage))
+
+                        {
+                            <div class="alert alert-danger mt-3">
+                                @errorMessage
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .transition-transform {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .transition-transform:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control-lg {
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control-lg:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+            border-color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .alert-danger {
+            font-size: 0.875rem;
+        }
+    </style>
+}

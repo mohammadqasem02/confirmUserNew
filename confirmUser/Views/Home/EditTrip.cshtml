@@ -1,0 +1,115 @@
+﻿@model EditViewModel
+
+<div class="container w-100 align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+                <h2 class="text-center mb-4">Trip Details</h2>
+                <hr />
+                @using (Html.BeginForm("EditTrip", "Home", FormMethod.Post, new
+                {
+                    id = "editForm"
+                }))
+
+                {
+                    @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="User"></label>
+                        @Html.TextBoxFor(model => model.User, new
+                            {
+                                @class = "form-control form-control-lg",
+                                id = "UserId",
+                                type = "hidden"
+                            })
+                        @Html.ValidationMessageFor(model => model.User, "", new
+                            {
+                                @class = "text-danger"
+                            })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="Name">User Name</label>
+                        @Html.TextBoxFor(model => model.Name, new
+                            {
+                                @class = "form-control form-control-lg bg-light",
+                                id = "UserName",
+                                @readonly = "readonly"
+                            })
+                        @Html.ValidationMessageFor(model => model.Name, "", new
+                            {
+                                @class = "text-danger"
+                            })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="TripDate" class="form-label">Trip Date</label>
+                            <input asp-for="TripDate" class="form-control form-control-lg transition-shadow" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <span asp-validation-for="TripDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="TripsNum">Number of Trips</label>
+                        @Html.TextBoxFor(model => model.TripsNum, new
+                            {
+                                @class = "form-control form-control-lg transition-shadow",
+                                id = "TripsNum",
+                                type = "number"
+                            })
+                        @Html.ValidationMessageFor(model => model.TripsNum, "", new
+                            {
+                                @class = "text-danger"
+                            })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="HoursNum">Number of Hours</label>
+                        @Html.TextBoxFor(model => model.HoursNum, new
+                            {
+                                @class = "form-control form-control-lg transition-shadow",
+                                id = "HoursNum",
+                                type = "number"
+                            })
+                        @Html.ValidationMessageFor(model => model.HoursNum, "", new
+                            {
+                                @class = "text-danger"
+                            })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="TripDistanceKM">Trip Distance (KM)</label>
+                        @Html.TextBoxFor(model => model.TripDistanceKM, new
+                            {
+                                @class = "form-control form-control-lg transition-shadow",
+                                id = "TripDistanceKM",
+                                type = "number",
+                                step = "0.01"
+                            })
+                        @Html.ValidationMessageFor(model => model.TripDistanceKM, "", new
+                            {
+                                @class = "text-danger"
+                            })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="ApplicationID" class="form-label">Application</label>
+                        @Html.DropDownListFor(model => model.ApplicationID, Model.Applications, "Select an application", new
+                            {
+                                @class = "form-control transition-shadow"
+                            })
+                        </div>
+
+                        <div class="d-flex justify-content-center mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <script src="~/js/edittrip.js"></script>
+}
